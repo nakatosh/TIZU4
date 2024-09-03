@@ -42,8 +42,12 @@ function markerClick(e){
 
   //現在地取得
   GPS();
+
   //接地抵抗クリア 
-  setti1.value = "";
+  deleteAll();
+
+
+
   //接地抵抗に移動
   document.getElementById('setti1').focus()
   //DBから値をもらう
@@ -63,14 +67,19 @@ function markerClick(e){
 
   request.onsuccess = function (event) {  
 
+      //絶対もらう
+      Kno.value = event.target.result.myKno
+      MOKU.value = event.target.result.myMOKU
+      biko.value = event.target.result.mybiko
+      etc.value = event.target.result.myetc
+
     if (event.target.result === undefined) {} else {
       //値あり
       var aaa = Number(event.target.result.myvalue)
       //0だったらヌル数字だったら数字
       if(aaa===0){setti1.value ="";} else {
+
       setti1.value = aaa;
-      biko.value = event.target.result.mybiko
-      etc.value = event.target.result.myetc
       IV.value = event.target.result.myIV
       BRK.value = event.target.result.myBRK
       TIK2.value = event.target.result.myTIK2
@@ -78,9 +87,6 @@ function markerClick(e){
       SUTE.value = event.target.result.mySUTE
       BSY.value = event.target.result.myBSY
 
-      Kno.value = event.target.result.myKno
-
-      MOKU.value = event.target.result.myMOKU
 
       DBA.value = event.target.result.myDBA
       DBB.value = event.target.result.myDBB
@@ -174,13 +180,13 @@ var Kno = document.getElementById("Kno").value;
 
   radioNodeList[0].checked = true ;
 
-	document.getElementById("etc").selectedIndex = 0;
-  document.getElementById("BSY").value = "";
-  document.getElementById("IV").value = "";
-  document.getElementById("BRK").value = "";
-  document.getElementById("TIK2").value = "";
-  document.getElementById("TIK3").value = "";
-  document.getElementById("SUTE").value = ""; 
+document.getElementById("etc").selectedIndex = 0;
+document.getElementById("BSY").value = "";
+document.getElementById("IV").value = "";
+document.getElementById("BRK").value = "";
+document.getElementById("TIK2").value = "";
+document.getElementById("TIK3").value = "";
+document.getElementById("SUTE").value = ""; 
 document.getElementById("Kno").value = "";  
 document.getElementById("MOKU").value = "";
 document.getElementById("DBA").value = "";
@@ -188,7 +194,6 @@ document.getElementById("DBB").value = "";
 document.getElementById("DBC").value = "";
 document.getElementById("DBD").value = "";
 document.getElementById("DBE").value = "";
-
 document.getElementById("JB9").value = "";
 document.getElementById("JB1").value = "";
 document.getElementById("AM").value = "";
@@ -379,6 +384,34 @@ async function kanryo(){
 await MAKall();
 await map.fitBounds(KAN.getBounds());   
 };
+
+
+//入力欄をリセット
+function deleteAll() {
+document.getElementById("etc").selectedIndex = 0;
+document.getElementById("BSY").value = "";
+
+document.getElementById("IV").value = "";
+document.getElementById("BRK").value = "";
+document.getElementById("TIK2").value = "";
+document.getElementById("TIK3").value = "";
+document.getElementById("SUTE").value = ""; 
+
+document.getElementById("Kno").value = "";  
+document.getElementById("MOKU").value = "";
+
+document.getElementById("DBA").value = "";
+document.getElementById("DBB").value = "";
+document.getElementById("DBC").value = "";
+document.getElementById("DBD").value = "";
+document.getElementById("DBE").value = "";
+
+document.getElementById("JB9").value = "";
+document.getElementById("JB1").value = "";
+document.getElementById("AM").value = "";
+document.getElementById("YB1").value = "";
+document.getElementById("YB2").value = "";
+}
 	
 //現在時刻
 function ima() {
