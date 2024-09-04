@@ -14,8 +14,6 @@
       "type": "image/png"
   }
   ],
-
-  "description":"index.html",
  
   "start_url": "index.html",
   "display"           : "standalone",
