@@ -1,6 +1,6 @@
 var CACHE_NAME = 'pwa-sample-caches';
 var urlsToCache = [
-	'/pwa/',
+	'/TIZU4/',
 ];
 
 // インストール処理
