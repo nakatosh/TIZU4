@@ -72,7 +72,8 @@ function markerClick(e){
       MOKU.value = event.target.result.myMOKU
       biko.value = event.target.result.mybiko
       etc.value = event.target.result.myetc
-
+	radioNodeList[event.target.result.mytuti].checked = true 
+	  
     if (event.target.result === undefined) {} else {
       //値あり
       var aaa = Number(event.target.result.myvalue)
@@ -99,7 +100,7 @@ function markerClick(e){
       YB1.value = event.target.result.myYB1
       YB2.value = event.target.result.myYB2
 
-      radioNodeList[event.target.result.mytuti].checked = true ;
+      ;
       }
     }
     Bsyu();  //単独の時B種を表示する
