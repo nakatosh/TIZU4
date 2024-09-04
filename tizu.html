@@ -3,6 +3,20 @@
 <head>
 <meta charset="UTF-8"/>
 <title>接地マップ</title>
+
+<style>
+.box2{
+	z-index: 1000;
+	background-color: rgba(255,255,255,0.5);
+	width: 300px;
+	height: 50px;
+	position: absolute;
+
+	right: 0;
+	bottom: 0; /*下寄せの指定*
+}
+</style>
+
 <!--スマビュー-->
 <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes"/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
@@ -39,6 +53,12 @@ etc.addEventListener("input",function(){
 </head>
 <body>
 <div id="map"></div>
+
+<div class="box2">
+
+<label> 管理NOフィルタ</label><body onload="readFirst()"><select id="PullDownList" onchange="inputChange()"></select>
+         <input type="button" value="解除" onclick="KAIJYO()"/> 
+</div>
 
 <input type="checkbox" id="pop-up">
 <div class="overlay">
@@ -124,49 +144,37 @@ etc.addEventListener("input",function(){
 	<td align="center">銅棒C</td>
 	<td align="center">スパイラル1.5m</td>
 	<td align="center">スパイラル5m</td>
-      </tr>
-      <tr>
+      </tr><tr>
          <td><input type="number" id="DBA" name="DBA" class="BT"  placeholder="本"/></td>
          <td><input type="number" id="DBB" name="DBB" class="BT" placeholder="本"/></td>
          <td><input type="number" id="DBC" name="DBC" class="BT" placeholder="本"/></td>
          <td><input type="number" id="DBD" name="DBD" class="BT" placeholder="本"/></td>
          <td><input type="number" id="DBE" name="DBE" class="BT" placeholder="本"/></td>
       </tr>
-
-
-
-      </tr>
-      <tr>
+      </tr><tr>
 	<td align="center">IV線</td>
 	<td align="center">ボルコン</td>
 	<td align="center">蓄力２</td>
 	<td align="center">アルミB1</td>
 	<td align="center">ステバン</td>
-      </tr>
-    
-      <tr>
+      </tr><tr>
          <td><input type="number" id="IV" name="IV" class="BT"  placeholder="ｍ"/></td>
          <td><input type="number" id="BRK" name="BRK" class="BT" placeholder="個数"/></td>
          <td><input type="number" id="TIK2" name="TIK2" class="BT" placeholder="個数"/></td>
          <td><input type="number" id="TIK3" name="TIK3" class="BT" placeholder="個数"/></td>
          <td><input type="number" id="SUTE" name="SUTE" class="BT" placeholder="本"/></td>
-      </tr>
-
-      <tr>
-
+      </tr><tr>
 	<td align="center">樹脂バン900</td>
 	<td align="center">樹脂バン1200</td>
 	<td align="center">アースモール</td>
 	<td align="center">予備１</td>
 	<td align="center">予備２</td>
-      </tr>
-      <tr>
+      </tr><tr>
          <td><input type="number" id="JB9" name="JB9" class="BT" placeholder="本"/></td>
          <td><input type="number" id="JB1" name="JB1" class="BT" placeholder="本"/></td>
          <td><input type="number" id="AM" name="AM" class="BT"  placeholder="本"/></td>
          <td><input type="number" id="YB1" name="YB1" class="BT" placeholder="本"/></td>
          <td><input type="number" id="YB2" name="YB2" class="BT" placeholder="本"/></td>
-
       </tr>
    </table>
 
@@ -246,8 +254,15 @@ window.location.href = './index.html'; // 通常の遷移
 //起動時スクリプト
 window.addEventListener("load", function() {
 mikan();
+KANRINOa();
 });
 
+
+//検索解除
+function KAIJYO() {
+ document.getElementById("PullDownList").value = "";
+MAKall();
+}
 
 
 </script>
