@@ -63,7 +63,7 @@ function markerClick(e){
   var store = transaction.objectStore("mystore");                  
   var request = store.get(key);
   var element = document.getElementById( "tutibox" ) ;
-  var radioNodeList = element.tuti ;
+  var radioNodeList = element.tuti ; 
 
   request.onsuccess = function (event) {  
 
