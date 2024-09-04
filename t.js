@@ -99,8 +99,6 @@ function markerClick(e){
       YB1.value = event.target.result.myYB1
       YB2.value = event.target.result.myYB2
 
-
-
       radioNodeList[event.target.result.mytuti].checked = true ;
       }
     }
@@ -110,14 +108,13 @@ function markerClick(e){
 
 //登録  
 function setValue(event) {
+
   var key = document.getElementById("POLNO").value;
   var value = Number(document.getElementById("setti1").value);
   var LAT = Number(document.getElementById("LAT").value);
   var LNG = Number(document.getElementById("LNG").value);
-
   var GLAT = Number(document.getElementById("GLAT").value);
   var GLNG = Number(document.getElementById("GLNG").value);
-
   var now = document.getElementById("noww").value;
   var etc = document.getElementById("etc").value;
   var BSY = Number(document.getElementById("BSY").value);
@@ -126,21 +123,20 @@ function setValue(event) {
   var TIK2 = document.getElementById("TIK2").value;
   var TIK3 = document.getElementById("TIK3").value;
   var SUTE = document.getElementById("SUTE").value;
+  var MOKU = document.getElementById("MOKU").value;
+  var DBA = document.getElementById("DBA").value;
+  var DBB = document.getElementById("DBB").value;
+  var DBC = document.getElementById("DBC").value;
+  var DBD = document.getElementById("DBD").value;
+  var DBE = document.getElementById("DBE").value;
+  var JB9 = document.getElementById("JB9").value;
+  var JB1 = document.getElementById("JB1").value;
+  var AM = document.getElementById("AM").value;
+  var YB1 = document.getElementById("YB1").value;
+  var YB2 = document.getElementById("YB2").value;
+  var Kno = document.getElementById("Kno").value;
 
-var MOKU = document.getElementById("MOKU").value;
 
-var DBA = document.getElementById("DBA").value;
-var DBB = document.getElementById("DBB").value;
-var DBC = document.getElementById("DBC").value;
-var DBD = document.getElementById("DBD").value;
-var DBE = document.getElementById("DBE").value;
-
-var JB9 = document.getElementById("JB9").value;
-var JB1 = document.getElementById("JB1").value;
-var AM = document.getElementById("AM").value;
-var YB1 = document.getElementById("YB1").value;
-var YB2 = document.getElementById("YB2").value;
-var Kno = document.getElementById("Kno").value;
 
   //チェック
   if (key >0){} else {alert('マーカーをクリックしてから登録してください!!');return;}
@@ -174,31 +170,7 @@ var Kno = document.getElementById("Kno").value;
   MAK();
 
   //入力欄リセット
-	document.getElementById("POLNO").value = "";
-	document.getElementById("setti1").value = "";
-	document.getElementById("biko").value = "";
-
-  radioNodeList[0].checked = true ;
-
-document.getElementById("etc").selectedIndex = 0;
-document.getElementById("BSY").value = "";
-document.getElementById("IV").value = "";
-document.getElementById("BRK").value = "";
-document.getElementById("TIK2").value = "";
-document.getElementById("TIK3").value = "";
-document.getElementById("SUTE").value = ""; 
-document.getElementById("Kno").value = "";  
-document.getElementById("MOKU").value = "";
-document.getElementById("DBA").value = "";
-document.getElementById("DBB").value = "";
-document.getElementById("DBC").value = "";
-document.getElementById("DBD").value = "";
-document.getElementById("DBE").value = "";
-document.getElementById("JB9").value = "";
-document.getElementById("JB1").value = "";
-document.getElementById("AM").value = "";
-document.getElementById("YB1").value = "";
-document.getElementById("YB2").value = "";
+	deleteAll();
 
 
   ck0();
@@ -216,7 +188,6 @@ function MAKall(event) {
     var store = transaction.objectStore("mystore");
     var request = store.openCursor();
 
-
     //マーカーレイヤー削除
     MI.clearLayers();
     KAN.clearLayers();
@@ -228,53 +199,38 @@ function MAKall(event) {
       resolve()   
       return;
       }
+
       var cursor = event.target.result;
       var data = cursor.value;
-      var divIcon3 = L.divIcon({
-        html: data.mykey.slice( -4 ),
-        className: 'divicon2',
-        iconSize: [0,0],
-      
-        iconAnchor: [0,28]
-      });
+      var divIcon3 = L.divIcon({html: data.mykey.slice( -4 ),className: 'divicon2', iconSize: [0,0], iconAnchor: [0,28] });
   
-      moji.addLayer(L.marker([data.myLAT, data.myLNG], {icon: divIcon3,customID: data.mykey}).on('click', function(e) { markerClick(e);}));
 
-      //値が入ってたら完了（グレー）、未入力ピンク
-      if(data.myvalue>0){
-        
-      //L.marker([data.myLAT, data.myLNG],{icon:myIcon2,customID: data.mykey}).addTo(KAN).on('click', function(e) { markerClick(e);});
-      KAN.addLayer(
-            L.circleMarker([data.myLAT, data.myLNG],{
-          color: '#fdfdfd',
-          weight: 1,
-          opacity: 1,
-          fillColor: '#534f4f',
-          fillOpacity: 1,
-          radius: 10,
-          
-          customID: data.mykey })
+//検索BOXに値が入っていてかつ一致したら書く
+  var kno =document.getElementById("PullDownList").value 
 
-        .on('click', function(e) { markerClick(e);})
-      );
-      } else {
-        
-        MI.addLayer(
-          L.circleMarker([data.myLAT, data.myLNG],{
-            color: '#fdfdfd',
-            weight: 1,
-            opacity: 1,
-            fillColor: '#fa04b0',
-            fillOpacity: 1,
-            radius: 10,
-            
-          customID: data.mykey})
+if(kno > 0){
+	if(data.myKno == kno){
+	//一致だけ書く
+		if(data.myvalue>0){
+	 KAN.addLayer( L.circleMarker([data.myLAT, data.myLNG],{color: '#fdfdfd',weight: 1,opacity: 1, fillColor: '#534f4f', fillOpacity: 1, radius: 10, customID: data.mykey }).on('click', function(e) { markerClick(e);}));   
+	 } else {
+	 MI.addLayer( L.circleMarker([data.myLAT, data.myLNG],{color: '#fdfdfd',weight: 1,opacity: 1,fillColor: '#fa04b0',fillOpacity: 1,radius: 10, customID: data.mykey}).on('click', function(e) { markerClick(e);}));
+	 }
+	moji.addLayer(L.marker([data.myLAT, data.myLNG], {icon: divIcon3,customID: data.mykey}).on('click', function(e) { markerClick(e);}));
+	} else {}
 
-        .on('click', function(e) { markerClick(e);})
-        );
-      }
+} else {
+//全部書く
 
-     cursor.continue();
+        //値が入ってたら完了（グレー）、未入力ピンク
+	if(data.myvalue>0){
+	 KAN.addLayer( L.circleMarker([data.myLAT, data.myLNG],{color: '#fdfdfd',weight: 1,opacity: 1, fillColor: '#534f4f', fillOpacity: 1, radius: 10, customID: data.mykey }).on('click', function(e) { markerClick(e);}));   
+	 } else {
+	 MI.addLayer( L.circleMarker([data.myLAT, data.myLNG],{color: '#fdfdfd',weight: 1,opacity: 1,fillColor: '#fa04b0',fillOpacity: 1,radius: 10, customID: data.mykey}).on('click', function(e) { markerClick(e);}));
+	 }
+	moji.addLayer(L.marker([data.myLAT, data.myLNG], {icon: divIcon3,customID: data.mykey}).on('click', function(e) { markerClick(e);}));
+}
+	cursor.continue();
     }
   })
 }
@@ -388,29 +344,11 @@ await map.fitBounds(KAN.getBounds());
 
 //入力欄をリセット
 function deleteAll() {
-document.getElementById("etc").selectedIndex = 0;
-document.getElementById("BSY").value = "";
-
-document.getElementById("IV").value = "";
-document.getElementById("BRK").value = "";
-document.getElementById("TIK2").value = "";
-document.getElementById("TIK3").value = "";
-document.getElementById("SUTE").value = ""; 
-
-document.getElementById("Kno").value = "";  
-document.getElementById("MOKU").value = "";
-
-document.getElementById("DBA").value = "";
-document.getElementById("DBB").value = "";
-document.getElementById("DBC").value = "";
-document.getElementById("DBD").value = "";
-document.getElementById("DBE").value = "";
-
-document.getElementById("JB9").value = "";
-document.getElementById("JB1").value = "";
-document.getElementById("AM").value = "";
-document.getElementById("YB1").value = "";
-document.getElementById("YB2").value = "";
+var arr = ['IV','BRK','TIK2','TIK3','SUTE','BSY','Kno','MOKU','DBA','DBB','DBC','DBD','DBE','JB9','JB1','AM','YB1','YB2'];
+	for (var i = 0; i < arr.length; i++){
+		document.getElementById(arr[i]).value = "";
+	}
+	document.getElementById("etc").selectedIndex = 0;
 }
 	
 //現在時刻
@@ -455,4 +393,45 @@ if (etc === '1' && st !== '999'){
   if (etc != '1' && st == "999"){
     document.getElementById('setti1').value = null;
     }
+}
+
+
+
+//管理NOリストBOXに格納　重複あり
+
+function KANRINOa(event) {
+  return new Promise(function(resolve) {
+    var result = document.getElementById("result");                   
+    var transaction = db.transaction(["mystore"], "readwrite");
+    var store = transaction.objectStore("mystore");
+    var request = store.openCursor();
+
+  
+    request.onsuccess = function (event) {
+      //リストがなかったら終了  
+      if(event.target.result == null) {
+      resolve()   
+      return;
+      }
+      var cursor = event.target.result;
+      var data = cursor.value;
+
+      let GCD = document.createElement("option");
+      GCD.value = data.myKno;  //value値
+      GCD.text = data.myKno;   //テキスト値
+  	document.getElementById("PullDownList").appendChild(GCD);
+	
+     cursor.continue();
+	document.getElementById("PullDownList").value = "";
+    }
+
+  })
+
+}
+
+
+//フィーダを選択
+function inputChange(){
+MAKall();
+
 }
