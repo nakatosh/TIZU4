@@ -1,4 +1,4 @@
-var CACHE_NAME = 'pwa-sample-caches';
+var CACHE_NAME = 'SettiSokutei-caches';
 var urlsToCache = [
 	'/TIZU4/',
 ];
