@@ -81,13 +81,11 @@ padding: 0; margin: 0
 }
 
 .window {
-
 	width: 380px;
-	height: 440px;
+	height: 445px;
 	background-color: #bbb8b8;
 	border-radius: 10px;
 	position: fixed;
-
 	transform: translate(5%, 5%);
 	font-size: 12px;
 }
