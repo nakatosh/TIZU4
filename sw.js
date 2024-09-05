@@ -1,6 +1,13 @@
 var CACHE_NAME = 'SettiSokutei-caches';
 var urlsToCache = [
-	'/TIZU4/',
+    '/TIZU4/index.css',
+    '/TIZU4/index.html',
+
+    '/TIZU4/easy-button.css',
+    '/TIZU4/easy-button.js',
+
+    '/TIZU4/t.js',
+    '/TIZU4/T.css'
 ];
 
 // インストール処理
